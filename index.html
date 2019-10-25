@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>JS Clock</title>
+</head>
+
+<body>
+    <div class="clock">
+        <div class="hour">
+            <div class="hr" id="hr"></div>
+        </div>
+        <div class="min">
+            <div class="mn" id="mn"></div>
+        </div>
+        <div class="sec">
+            <div class="sc" id="sc"></div>
+        </div>
+    </div>
+    <script>
+        // Get DOM elements
+        const hr = document.querySelector("#hr");
+        const mn = document.querySelector("#mn");
+        const sc = document.querySelector("#sc");
+
+        // Execute function every second
+        setInterval(() => {
+            // Get current date
+            let day = new Date();
+            let hh = day.getHours();
+            let mm = day.getMinutes();
+            let ss = day.getSeconds();
+
+            // Transform Hours, Minutes and Seconds to degrees
+            let hoursToDegrees = hh * 30;  // 720 degrees (2 complete rotations) equals to 24h, then 1h equals 30 degrees
+            let minutesToDegrees = mm * 6; // 360 degrees (1 complete rotation) equals to 60min, then 1min equals 6 degrees
+            let secondsToDegrees = sc * 6; // 360 degrees (1 complete rotation) equals to 60sec, then sec equals 6 degrees
+
+            // Rotate clock hands based on the degrees which are based in the current date / time
+            hr.style.transform = `rotateZ(${hoursToDegrees + (mm/12)}deg)`;
+            mn.style.transform = `rotateZ(${minutesToDegrees}deg)`;
+            sc.style.transform = `rotateZ(${secondsToDegrees}deg)`;
+        });
+    </script>
+</body>
+
+</html>
